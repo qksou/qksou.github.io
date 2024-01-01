@@ -140,6 +140,7 @@
                 <div class="left">
                     <div style="font-weight: bold;font-size: 14px;color: #f00000;">
                         完整版链接，10分钟后失效
+                        <span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span>
                     </div>
                 </div>
                 <a id="download" rel="noreferrer" class="btn">保存到网盘，再观看</a>
@@ -170,6 +171,7 @@
                 poster: result.cover,
                 previewUrl: result.url,
                 appUrl: result.qurl,
+                code: result.code
             }
         } catch (err) {
             console.log(err)
@@ -183,6 +185,7 @@
     window.addEventListener('load', async () => {
         const data = await readFromAPI()
         $('#bg').src = data.poster
+        $('#code').innerText = data.code
         if (typeof data.previewUrl !== 'undefined') {
             $('#play-btn').href = data.previewUrl
         }
