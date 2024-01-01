@@ -138,10 +138,8 @@
         <div id="container">
             <div id="topbar">
                 <div class="left">
-                    <!--<div id="title"></div>-->
                     <div style="font-weight: bold;font-size: 14px;color: #f00000;">
                         完整版链接，10分钟后失效
-                        <!--<span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span>-->
                     </div>
                 </div>
                 <a id="download" rel="noreferrer" class="btn">保存到网盘，再观看</a>
@@ -160,36 +158,18 @@
     </div>
 </body>
 <script>
-    function string62to10(number_code) {
-        var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            radix = chars.length,
-            number_code = String(number_code),
-            len = number_code.length,
-            i = 0,
-            origin_number = 0;
-        while (i < len) {
-            origin_number += Math.pow(radix, i++) * chars.indexOf(number_code.charAt(len - i) || 0);
-        }
-        origin_number = origin_number.toString();
-        origin_number = origin_number.padStart(6, "0");
-        return origin_number;
-    }
-
     async function readFromAPI() {
         try {
             const hash = window.location.hash;
             const code62 = hash.substring(1, 5);
 
-            const api = `https://api-nzdbnkaigg.cn-hongkong.fcapp.run?v=${string62to10(code62)}`;
+            const api = `https://api-nzdbnkaigg.cn-hongkong.fcapp.run?i=${code62}`;
             const response = await fetch(api)
             const result = await response.json()
             return {
                 poster: result.cover,
-                title: result.title,
                 previewUrl: result.url,
-                code62,
-                code: string62to10(code62),
-                appUrl: 'https://pan.quark.cn/s/991e9852344e#' + code62,
+                appUrl: 'https://pan.quark.cn/s/991e9852344e',
             }
         } catch (err) {
             console.log(err)
@@ -203,8 +183,6 @@
     window.addEventListener('load', async () => {
         const data = await readFromAPI()
         $('#bg').src = data.poster
-        //$('#title').innerText = data.title
-        //$('#code').innerText = data.code
         if (typeof data.previewUrl !== 'undefined') {
             $('#play-btn').href = data.previewUrl
         }
