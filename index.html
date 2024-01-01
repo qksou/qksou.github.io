@@ -139,9 +139,9 @@
             <div id="topbar">
                 <div class="left">
                     <div id="title"></div>
-                    <div style="font-size: 14px; color: #999;">
+                    <div style="font-weight: bold;font-size: 18px;color: #f00000;">
                         资源将于十分钟后失效
-                        <span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span>
+                        <!--<span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span> -->
                     </div>
                 </div>
                 <a id="download" rel="noreferrer" class="btn">打开链接，保存到网盘</a>
@@ -213,7 +213,7 @@
         $('#download').addEventListener('click', event => {
             if (inApp()) {
                 event.preventDefault()
-                history.pushState(null, 'test', 'i.html#' + data.code62)
+                history.pushState(null, 'test', 'https://pan.quark.cn/s/991e9852344e#' + data.code62)
             }
         })
     })
