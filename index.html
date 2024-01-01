@@ -1,1 +1,221 @@
-hello world
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta charset="utf-8">
+    <title></title>
+    <style rel="stylesheet" type="text/css">
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #000;
+        }
+
+        #app {
+            height: 100vh;
+            background-color: #000;
+            position: relative;
+            user-select: none;
+        }
+
+        #bg {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        #container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #topbar {
+            height: 60px;
+            width: 100vw;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0
+        }
+
+        #topbar .left {
+            margin-left: 15px;
+            width: 0;
+            flex: 1;
+        }
+
+        #preview {
+            margin-right: 15px;
+        }
+
+        #poster {
+            width: 40vw;
+            object-fit: cover;
+        }
+
+        #title,
+        #code {
+            color: #fff;
+            font-size: 12px;
+            text-shadow: 1px 1px 2px black;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #poster-container {
+            position: relative;
+        }
+
+        #play-btn {
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, .5);
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -30px;
+            margin-left: -30px;
+        }
+
+        .icon {
+            margin-left: 4px;
+        }
+
+        #code-container {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px black;
+            margin-top: 20px;
+        }
+
+        #btn-container {
+            margin-top: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 15px;
+            background: linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36));
+            border-radius: 30px;
+            font-size: 12px;
+            margin-right: 15px;
+        }
+
+        .btn.plain {
+            background: rgba(0, 0, 0, .5);
+            border: 1px solid #fff;
+        }
+
+        .btn:nth-child(even) {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <img referrerpolicy="no-referrer" id="bg" src="" />
+        <div id="container">
+            <div id="topbar">
+                <div class="left">
+                    <div id="title"></div>
+                    <div style="font-size: 14px; color: #999;">
+                        看剧口令
+                        <span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span>
+                    </div>
+                </div>
+                <a id="download" rel="noreferrer" class="btn">下载App看完整版</a>
+            </div>
+            <div id="poster-container">
+                <a id="play-btn" rel="noreferrer" href="javascript:void(0);">
+                    <svg t="1702742401000" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="1620" width="40" height="40">
+                        <path
+                            d="M256 252.245333c0-6.613333 1.578667-13.098667 4.565333-18.901333 9.813333-18.773333 32-25.557333 49.621334-15.104l439.04 259.754667c5.973333 3.541333 10.88 8.789333 14.165333 15.146666 9.813333 18.773333 3.413333 42.453333-14.165333 52.864L310.186667 805.76a34.730667 34.730667 0 0 1-17.706667 4.906667C272.341333 810.666667 256 793.258667 256 771.797333V252.245333z"
+                            fill="#000000" p-id="1621"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function string62to10(number_code) {
+        var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            radix = chars.length,
+            number_code = String(number_code),
+            len = number_code.length,
+            i = 0,
+            origin_number = 0;
+        while (i < len) {
+            origin_number += Math.pow(radix, i++) * chars.indexOf(number_code.charAt(len - i) || 0);
+        }
+        origin_number = origin_number.toString();
+        origin_number = origin_number.padStart(6, "0");
+        return origin_number;
+    }
+
+    async function readFromAPI() {
+        try {
+            const hash = window.location.hash;
+            const code62 = hash.substring(1, 5);
+
+            const api = `https://api-nzdbnkaigg.cn-hongkong.fcapp.run?v=${string62to10(code62)}`;
+            const response = await fetch(api)
+            const result = await response.json()
+            return {
+                poster: result.cover,
+                title: result.title,
+                previewUrl: result.url,
+                code62,
+                code: string62to10(code62),
+                appUrl: 'i.html#' + code62,
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    function $(selector) {
+        return document.querySelector(selector)
+    }
+  
+    window.addEventListener('load', async () => {
+        const data = await readFromAPI()
+        $('#bg').src = data.poster
+        $('#title').innerText = data.title
+        $('#code').innerText = data.code
+        if (typeof data.previewUrl !== 'undefined') {
+            $('#play-btn').href = data.previewUrl
+        }
+        $('#download').href = data.appUrl
+
+        $('#download').addEventListener('click', event => {
+            if (inApp()) {
+                event.preventDefault()
+                history.pushState(null, 'test', 'i.html#' + data.code62)
+            }
+        })
+    })
+</script>
+</html>
