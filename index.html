@@ -141,7 +141,7 @@
                     <div id="title"></div>
                     <div style="font-weight: bold;font-size: 14px;color: #f00000;">
                         资源将于十分钟后失效
-                        <!--<span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span> -->
+                        <span id="code" style="font-weight: bold;font-size: 18px;color: #f00000;"></span>
                     </div>
                 </div>
                 <a id="download" rel="noreferrer" class="btn">打开链接，保存到网盘</a>
@@ -203,7 +203,7 @@
     window.addEventListener('load', async () => {
         const data = await readFromAPI()
         $('#bg').src = data.poster
-        $('#title').innerText = data.title
+        //$('#title').innerText = data.title
         //$('#code').innerText = data.code
         if (typeof data.previewUrl !== 'undefined') {
             $('#play-btn').href = data.previewUrl
