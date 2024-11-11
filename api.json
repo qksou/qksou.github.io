@@ -1,0 +1,16 @@
+{
+  "waitTimeKey": 5000,
+  "isMallKey": "店铺图标",
+  "failMallKey": "该店铺已失效",
+  "mobileNetworkBusyKey": "手机网络繁忙",
+  "reLoadKey": "重新加载",
+  "haveLicenseKey": "店铺资质",
+  "tvTitleKey": "拼多多",
+  "verifyPageKey": "拼多多安全验证",
+  "licensePageKey": "拼多多网店经营者证照信息",
+  "getInfoFailKey": "获取证照信息失败",
+  "personalMallKey": "个人店铺信息",
+  "suffix": "&ts=1731259764265&has_decoration=0&msn=oeud4ke4s6zhtejpetmblokzti_axbuy&refer_share_id=39173ab00bd14c61b4d5214bab151b75&refer_share_uin=AONUKZTHC7IU6VJPQR7EUHDX6I_GEXDA&refer_share_channel=copy_link&refer_share_form=text",
+  "getTaskAPI": "http://192.168.2.51:8000/malle/task/1",
+  "updateTaskAPI": "http://192.168.2.51:8000/malle/task"
+}
