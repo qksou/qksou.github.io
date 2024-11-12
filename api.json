@@ -11,7 +11,7 @@
   "getInfoFailKey": "获取证照信息失败",
   "personalMallKey": "个人店铺信息",
   "suffix": "&ts=1731259764265&has_decoration=0&msn=oeud4ke4s6zhtejpetmblokzti_axbuy&refer_share_id=39173ab00bd14c61b4d5214bab151b75&refer_share_uin=AONUKZTHC7IU6VJPQR7EUHDX6I_GEXDA&refer_share_channel=copy_link&refer_share_form=text",
-  "getTaskAPI": "http://192.168.2.51:8000/malle/task/1",
-  "updateTaskAPI": "http://192.168.2.51:8000/malle/task",
+  "getTaskAPI": "http://yd.zyfrp.vip:59682/malle/task/1",
+  "updateTaskAPI": "http://yd.zyfrp.vip:59682/malle/task",
   "mallPageUrl": "pinduoduo://com.xunmeng.pinduoduo/mall_page.html?mall_id="
 }
